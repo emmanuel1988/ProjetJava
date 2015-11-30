@@ -21,4 +21,3 @@ public class CircleButtonListener extends ShapeButtonListener {
 		return c;
 	}
 }
-

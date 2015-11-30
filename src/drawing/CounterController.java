@@ -7,6 +7,7 @@ public class CounterController implements ActionListener {
 
 	Drawing drawing;
 	Shape shape;
+	DrawingAllListener dal;
 	
 	public CounterController(Drawing drawing) {
 		this.drawing = drawing;
@@ -16,6 +17,8 @@ public class CounterController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		drawing.addShape(shape);
+		
+		
 	}
 
 }

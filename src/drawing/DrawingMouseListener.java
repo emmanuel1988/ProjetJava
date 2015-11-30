@@ -3,6 +3,7 @@ package drawing;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import drawing.Shape;
 
 
@@ -33,10 +34,14 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 	 */
 	public void mousePressed(MouseEvent e) {
 		for(Shape s : drawing){
+			//drawing.ajout(s);
 			if(s.isOn(e.getPoint())){
-				currentShape = s;
+			   currentShape = s;
+			   drawing.currentShape=s;
 				break;
+				
 			}
+		
 		}
 	}
 
@@ -47,6 +52,7 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 		currentShape = null;
 
 	}
+	
 
 	public void mouseMoved(MouseEvent e) {
 	}
@@ -60,4 +66,3 @@ public class DrawingMouseListener implements MouseMotionListener, MouseListener 
 	public void mouseExited(MouseEvent e) {
 	}
 }
-

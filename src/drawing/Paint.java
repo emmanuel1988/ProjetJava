@@ -3,6 +3,7 @@ package drawing;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ public class Paint implements Observer{
 
 	private JFrame frame;
 	private JButton clearButton;
+	private JButton ajoutButton;
 	private JButton moveButton;
 	private JButton circleButton;
 	private JButton rectangleButton;
@@ -27,11 +29,15 @@ public class Paint implements Observer{
 	public Paint(CounterController controller) {
 		circleButton = new JButton("Circle");
 		rectangleButton = new JButton("Rectangle");
+		moveButton=new JButton("move");
 		counterFld = new JTextField();
 		counterFld.setPreferredSize(new Dimension(70, 20));
 		
 		circleButton.addActionListener(controller);
 		rectangleButton.addActionListener(controller);
+		//moveButton.addActionListener(controller);
+		
+	
 		
 	}
 	
@@ -43,17 +49,15 @@ public class Paint implements Observer{
 		drawing = new Drawing();
 		drawing.setBackground(Color.WHITE);
 		clearButton = new JButton("Clear");
-		moveButton=new JButton("move");
-		/*circleButton = new JButton("Circle");
-		rectangleButton = new JButton("Rectangle");
-		counterFld = new JTextField();
-		counterFld.setPreferredSize(new Dimension(70, 20));*/
-		
+		ajoutButton=new JButton("Ajouter");
 		buttonPanel = new JPanel();
 		buttonPanel.add(clearButton);
+		buttonPanel.add(ajoutButton);
 		buttonPanel.add(circleButton);
 		buttonPanel.add(rectangleButton);
 		buttonPanel.add(counterFld);
+		buttonPanel.add(moveButton);
+		
 		
 		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 		mainPanel.add(drawing, BorderLayout.CENTER);
@@ -62,12 +66,17 @@ public class Paint implements Observer{
 		clearButton.addActionListener(new ClearButtonListener(drawing));
 		circleButton.addActionListener(new CircleButtonListener(drawing));
 		rectangleButton.addActionListener(new RectangleButtonListener(drawing));
+		ajoutButton.addActionListener(new AjoutButtonListener(drawing));
+		
+		
 		
 		//listeners pour la zone de dessin
 		DrawingMouseListener l = new DrawingMouseListener(drawing);
+		DrawingAllListener ll=new DrawingAllListener(drawing);
 		drawing.addMouseListener(l);
 		drawing.addMouseMotionListener(l);
-
+		drawing.addMouseListener(ll);
+		drawing.addMouseMotionListener(ll);
 		frame.getContentPane().add(mainPanel);
 		frame.setSize(640,480);
 		frame.setVisible(true);

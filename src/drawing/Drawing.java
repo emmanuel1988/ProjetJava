@@ -14,12 +14,18 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	private static final long serialVersionUID = 1L;
 	
 	ArrayList<Shape> shapes;
+	Shape p;
+	ArrayList<Shape> multiShape=new ArrayList<Shape>();
+	ArrayList<Shape> multiShape1=new ArrayList<Shape>();
 	public Vector<Observer> observers = new Vector<>();
 	int compteur=0;
+
+	public Shape currentShape=null;
 	
 	public Drawing(){
 		super();
 		shapes = new ArrayList<Shape>();
+	
 	}
 	
 	/**
@@ -28,6 +34,7 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	public Iterator<Shape> iterator(){
 		return shapes.iterator();
 	}
+	
 	
 	/**
 	 * Ajoute une forme au dessin et redessine
@@ -38,7 +45,15 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 		this.notifyObservers();
 		this.repaint();
 	}
-	
+	public boolean addMuultiShape(Shape s)
+	{
+		multiShape.add(s);
+		this.notifyObservers();
+		this.repaint();
+		return false;
+		
+		
+	}
 	
 	public void addObserver(Observer obs){
 		observers.add(obs);
@@ -71,6 +86,26 @@ public class Drawing extends JPanel implements Iterable<Shape> {
 	public void clear(){
 		shapes.clear();
 		this.repaint();
+	}
+	public void ajout()
+	{
+		
+		if(!multiShape.contains(currentShape))
+		{
+			
+			multiShape.add(currentShape);
+			this.notifyObservers();
+		}
+		
+		System.out.println(multiShape);
+	}
+	public void retire ()
+	{
+		if(multiShape.contains(currentShape))
+		{
+			multiShape.remove(multiShape);
+			this.notifyObservers();
+		}
 	}
 	
 }

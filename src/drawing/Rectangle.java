@@ -28,4 +28,3 @@ public class Rectangle extends Shape {
 		g.drawRect(origin.x, origin.y, width, height);
 	}
 }
-
